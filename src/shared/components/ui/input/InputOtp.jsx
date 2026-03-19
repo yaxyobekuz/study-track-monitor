@@ -11,20 +11,25 @@ import { cn } from "@/shared/utils/cn";
 // Digigits RegExp
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 
-const InputOtp = ({ className = "", ...props }) => {
+/**
+ * OTP input komponenti.
+ * @param {Object} props
+ * @param {string} [props.className]
+ * @param {number} [props.maxLength=6] - OTP uzunligi (slotlar soni)
+ * @returns {import("react").ReactElement}
+ */
+const InputOtp = ({ className = "", maxLength = 6, ...props }) => {
   return (
     <InputOTPComponent
-      maxLength={5}
+      maxLength={maxLength}
       className={cn(className)}
       pattern={REGEXP_ONLY_DIGITS}
       {...props}
     >
       <InputOTPGroup>
-        <InputOTPSlot index={0} />
-        <InputOTPSlot index={1} />
-        <InputOTPSlot index={2} />
-        <InputOTPSlot index={3} />
-        <InputOTPSlot index={4} />
+        {Array.from({ length: maxLength }).map((_, i) => (
+          <InputOTPSlot key={i} index={i} />
+        ))}
       </InputOTPGroup>
     </InputOTPComponent>
   );
