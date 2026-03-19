@@ -1,8 +1,9 @@
 import http from "@/shared/api/http";
 
+/**
+ * Monitor ijtimoiy tarmoqlar API.
+ * @property {Function} getAll - Barcha ijtimoiy tarmoqlar ro'yxati
+ */
 export const socialNetworksAPI = {
-  getAll: () => http.get("/social-networks"),
-  create: (data) => http.post("/social-networks", data),
-  update: (id, data) => http.put(`/social-networks/${id}`, data),
-  delete: (id) => http.delete(`/social-networks/${id}`),
+  getAll: () => http.get("/monitor/social-networks"),
 };
