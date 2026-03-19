@@ -15,9 +15,9 @@ const http = axios.create({
 // Request interceptor
 http.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+    const monitorCode = localStorage.getItem("monitorCode");
+    if (monitorCode) {
+      config.headers["x-monitor-code"] = monitorCode;
     }
     return config;
   },
@@ -31,8 +31,8 @@ http.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      localStorage.removeItem("authToken");
-      window.location.href = "/login";
+      localStorage.removeItem("monitorCode");
+      window.location.href = "/";
     }
 
     return Promise.reject(error);
